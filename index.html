@@ -237,6 +237,25 @@
 			}
 
 			/* ── SERVICES ── */
+			.service-group {
+				margin-bottom: 36px;
+			}
+
+			.service-group:last-child {
+				margin-bottom: 0;
+			}
+
+			.service-group-label {
+				font-size: 1.1em;
+				font-weight: 700;
+				text-transform: uppercase;
+				letter-spacing: 0.08em;
+				color: #4a90e2;
+				margin-bottom: 16px;
+				padding-bottom: 8px;
+				border-bottom: 2px solid rgba(74, 144, 226, 0.2);
+			}
+
 			.services {
 				display: grid;
 				grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -850,118 +869,126 @@
 
 			<div class="card">
 				<h2>Our Services 🎉</h2>
-				<div class="services">
-					<div
-						class="service-item"
-						onclick="openModal('dog')"
-						style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
-					>
-						<div class="service-icon">🐕</div>
-						<h3>Dog Care</h3>
-						<p>Walks, playtime, feeding, and lots of belly rubs for your canine companion!</p>
-						<p style="font-size: 0.9em; margin-top: 15px; opacity: 0.9">Click to learn more ✨</p>
-					</div>
-					<div
-						class="service-item"
-						onclick="openModal('cat')"
-						style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%)"
-					>
-						<div class="service-icon">🐈</div>
-						<h3>Cat Care</h3>
-						<p>Feeding, litter maintenance, cuddles, and playtime for your feline friend!</p>
-						<p style="font-size: 0.9em; margin-top: 15px; opacity: 0.9">Click to learn more ✨</p>
-					</div>
-					<div
-						class="service-item"
-						onclick="openModal('fish')"
-						style="background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%)"
-					>
-						<div class="service-icon">🐠</div>
-						<h3>Fish Care</h3>
-						<p>Feeding and tank maintenance to keep your aquatic buddies happy and healthy!</p>
-						<p style="font-size: 0.9em; margin-top: 15px; opacity: 0.9">Click to learn more ✨</p>
-					</div>
-					<div
-						class="service-item"
-						onclick="openModal('reptile')"
-						style="background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%)"
-					>
-						<div class="service-icon">🦎</div>
-						<h3>Reptile Care</h3>
-						<p>Expert care for your scaly companions, from feeding to habitat maintenance!</p>
-						<p style="font-size: 0.9em; margin-top: 15px; opacity: 0.9">Click to learn more ✨</p>
-					</div>
-					<div
-						class="service-item"
-						onclick="openModal('exotic')"
-						style="background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%)"
-					>
-						<div class="service-icon">🦜</div>
-						<h3>Exotic Pet Care</h3>
-						<p>Specialized care for your unique and extraordinary animal companions!</p>
-						<p style="font-size: 0.9em; margin-top: 15px; opacity: 0.9">Click to learn more ✨</p>
-					</div>
-					<div
-						class="service-item"
-						onclick="openModal('bunny')"
-						style="background: linear-gradient(135deg, #feca57 0%, #ff9ff3 100%)"
-					>
-						<div class="service-icon">🐰</div>
-						<h3>Bunny Care</h3>
-						<p>Feeding, cage cleaning, and gentle care for your adorable hopping friend!</p>
-						<p style="font-size: 0.9em; margin-top: 15px; opacity: 0.9">Click to learn more ✨</p>
-					</div>
-					<div
-						class="service-item"
-						onclick="openModal('reiki')"
-						style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)"
-					>
-						<div class="service-icon">🧘‍♀️✨</div>
-						<h3>Animal Reiki</h3>
-						<p>Gentle energy healing to promote relaxation, reduce stress, and support your pet's wellbeing!</p>
-						<p style="font-size: 0.9em; margin-top: 15px; opacity: 0.9">Click to learn more ✨</p>
-					</div>
-					<div
-						class="service-item"
-						onclick="openModal('communication')"
-						style="background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)"
-					>
-						<div class="service-icon">💬🐾</div>
-						<h3>Animal Communication</h3>
-						<p>Intuitive connection to understand your pet's thoughts, feelings, and needs on a deeper level!</p>
-						<p style="font-size: 0.9em; margin-top: 15px; opacity: 0.9">Click to learn more ✨</p>
-					</div>
-					<div
-						class="service-item"
-						onclick="openModal('walking')"
-						style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%)"
-					>
-						<div class="service-icon">🚶‍♀️🐕</div>
-						<h3>Dog Walking</h3>
-						<p>Professional dog walking services to keep your pup happy, healthy, and exercised!</p>
-						<p style="font-size: 0.9em; margin-top: 15px; opacity: 0.9">Click to learn more ✨</p>
+
+				<!-- Pet Sitting & Care -->
+				<div class="service-group">
+					<p class="service-group-label">🏠 Pet Sitting &amp; Care</p>
+					<div class="services">
+						<div
+							class="service-item"
+							onclick="openModal('dog')"
+							style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+						>
+							<div class="service-icon">🐕</div>
+							<h3>Dog Care</h3>
+							<p>Walks, playtime, feeding, and lots of belly rubs for your canine companion!</p>
+							<p style="font-size: 0.9em; margin-top: 15px; opacity: 0.9">Click to learn more ✨</p>
+						</div>
+						<div
+							class="service-item"
+							onclick="openModal('cat')"
+							style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%)"
+						>
+							<div class="service-icon">🐈</div>
+							<h3>Cat Care</h3>
+							<p>Feeding, litter maintenance, cuddles, and playtime for your feline friend!</p>
+							<p style="font-size: 0.9em; margin-top: 15px; opacity: 0.9">Click to learn more ✨</p>
+						</div>
+						<div
+							class="service-item"
+							onclick="openModal('bunny')"
+							style="background: linear-gradient(135deg, #feca57 0%, #ff9ff3 100%)"
+						>
+							<div class="service-icon">🐰</div>
+							<h3>Bunny Care</h3>
+							<p>Feeding, cage cleaning, and gentle care for your adorable hopping friend!</p>
+							<p style="font-size: 0.9em; margin-top: 15px; opacity: 0.9">Click to learn more ✨</p>
+						</div>
+						<div
+							class="service-item"
+							onclick="openModal('fish')"
+							style="background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%)"
+						>
+							<div class="service-icon">🐠</div>
+							<h3>Fish Care</h3>
+							<p>Feeding and tank maintenance to keep your aquatic buddies happy and healthy!</p>
+							<p style="font-size: 0.9em; margin-top: 15px; opacity: 0.9">Click to learn more ✨</p>
+						</div>
+						<div
+							class="service-item"
+							onclick="openModal('reptile')"
+							style="background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%)"
+						>
+							<div class="service-icon">🦎</div>
+							<h3>Reptile Care</h3>
+							<p>Expert care for your scaly companions, from feeding to habitat maintenance!</p>
+							<p style="font-size: 0.9em; margin-top: 15px; opacity: 0.9">Click to learn more ✨</p>
+						</div>
+						<div
+							class="service-item"
+							onclick="openModal('exotic')"
+							style="background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%)"
+						>
+							<div class="service-icon">🦜</div>
+							<h3>Exotic Pet Care</h3>
+							<p>Specialized care for your unique and extraordinary animal companions!</p>
+							<p style="font-size: 0.9em; margin-top: 15px; opacity: 0.9">Click to learn more ✨</p>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="card">
-				<div class="warning-box">
-					<h3>
-						<span class="warning-icon">⚠️</span>
-						Important Safety Notice
-						<span class="warning-icon">⚠️</span>
-					</h3>
-					<p style="font-size: 1.2em; margin-bottom: 15px">
-						For the safety of everyone involved, please note the following restrictions:
-					</p>
-					<ul>
-						<li>Pets must be up-to-date on all vaccinations, including rabies</li>
-						<li>Pets with contagious illnesses or diseases cannot be accepted</li>
-						<li>Dogs must be properly socialized and comfortable with strangers</li>
-					</ul>
-					<p style="font-size: 1.1em; margin-top: 20px; font-style: italic">
-						Your pet's health records may be requested to ensure the safety and well-being of all animals in our care.
-					</p>
+				<!-- Dog Walking -->
+				<div class="service-group">
+					<p class="service-group-label">🚶‍♀️ Dog Walking</p>
+					<div class="services">
+						<div
+							class="service-item"
+							onclick="openModal('walking')"
+							style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%)"
+						>
+							<div class="service-icon">🚶‍♀️🐕</div>
+							<h3>Dog Walking</h3>
+							<p>Professional dog walking services to keep your pup happy, healthy, and exercised!</p>
+							<p style="font-size: 0.9em; margin-top: 15px; opacity: 0.9">Click to learn more ✨</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- Holistic Services -->
+				<div class="service-group">
+					<p class="service-group-label">✨ Holistic &amp; Wellness</p>
+					<div class="services">
+						<div
+							class="service-item"
+							onclick="openModal('reiki')"
+							style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)"
+						>
+							<div class="service-icon">🧘‍♀️✨</div>
+							<h3>Animal Reiki</h3>
+							<p>Gentle energy healing to promote relaxation, reduce stress, and support your pet's wellbeing!</p>
+							<p style="font-size: 0.9em; margin-top: 15px; opacity: 0.9">Click to learn more ✨</p>
+						</div>
+						<div
+							class="service-item"
+							onclick="openModal('communication')"
+							style="background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)"
+						>
+							<div class="service-icon">💬🐾</div>
+							<h3>Animal Communication</h3>
+							<p>Intuitive connection to understand your pet's thoughts, feelings, and needs on a deeper level!</p>
+							<p style="font-size: 0.9em; margin-top: 15px; opacity: 0.9">Click to learn more ✨</p>
+						</div>
+						<div
+							class="service-item"
+							onclick="openModal('massage')"
+							style="background: linear-gradient(135deg, #c471ed 0%, #f64f59 100%)"
+						>
+							<div class="service-icon">🐕</div>
+							<h3>Dog Massage</h3>
+							<p>Therapeutic massage to relax muscles, improve circulation, and melt away stress for your pup!</p>
+							<p style="font-size: 0.9em; margin-top: 15px; opacity: 0.9">Click to learn more ✨</p>
+						</div>
+					</div>
 				</div>
 			</div>
 
@@ -1338,6 +1365,51 @@
 					<p style="margin-top: 20px; font-style: italic; color: #4a90e2">
 						<strong>Special Note:</strong> Animal communication complements veterinary care but does not replace professional
 						medical diagnosis. Always consult your vet for health concerns.
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div id="massageModal" class="modal" onclick="closeModalOnBackground(event, 'massage')">
+			<div class="modal-content" onclick="event.stopPropagation()">
+				<span
+					class="close"
+					onclick="
+						closeModal('massage');
+						event.stopPropagation();
+					"
+					>&times;</span
+				>
+				<div class="modal-header">
+					<div class="modal-icon">🐕💆</div>
+					<h2 class="modal-title">Dog Massage Therapy</h2>
+				</div>
+				<div class="modal-body">
+					<p><strong>The ultimate relaxation experience for your pup!</strong></p>
+					<p>
+						Just like humans, dogs benefit enormously from therapeutic massage. It soothes sore muscles, improves circulation,
+						reduces anxiety, and deepens the bond between you and your pet.
+					</p>
+
+					<h3 style="color: #c471ed; margin-top: 25px; margin-bottom: 15px">Benefits of Dog Massage:</h3>
+					<ul>
+						<li>💆 <strong>Muscle Relief:</strong> Eases tension, stiffness, and soreness from exercise or aging</li>
+						<li>❤️ <strong>Improved Circulation:</strong> Boosts blood flow and lymphatic drainage for better overall health</li>
+						<li>😌 <strong>Anxiety Reduction:</strong> Calms nervous or anxious dogs and promotes a sense of safety</li>
+						<li>🦴 <strong>Joint Support:</strong> Gentle work around joints to improve flexibility and comfort</li>
+						<li>🔍 <strong>Early Detection:</strong> Helps identify lumps, tender spots, or changes in your dog's body</li>
+						<li>😴 <strong>Better Sleep:</strong> Relaxed pups sleep more soundly and wake up happier</li>
+					</ul>
+
+					<h3 style="color: #c471ed; margin-top: 25px; margin-bottom: 15px">What to Expect:</h3>
+					<p>
+						Sessions are tailored to your dog's comfort level and needs. We use gentle, slow strokes and always let your dog lead
+						— if they want a break, we take one! Most dogs melt into a puddle of relaxation within minutes.
+					</p>
+
+					<p style="margin-top: 20px; font-style: italic; color: #c471ed">
+						<strong>Perfect For:</strong> Senior dogs, post-surgery recovery, high-energy breeds that need to wind down, anxious
+						pups, or any dog who deserves a little extra TLC!
 					</p>
 				</div>
 			</div>
