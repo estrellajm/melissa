@@ -540,6 +540,7 @@
 				max-width: 700px;
 				max-height: 85vh;
 				overflow-y: auto;
+				overflow-x: hidden;
 				box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 				animation: slideIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 				position: relative;
@@ -551,21 +552,20 @@
 
 			/* Custom scrollbar for modal */
 			.modal-content::-webkit-scrollbar {
-				width: 10px;
+				width: 6px;
 			}
 
 			.modal-content::-webkit-scrollbar-track {
-				background: rgba(74, 144, 226, 0.1);
-				border-radius: 10px;
+				background: transparent;
 			}
 
 			.modal-content::-webkit-scrollbar-thumb {
-				background: linear-gradient(135deg, #4a90e2, #7ec8e3);
+				background: rgba(74, 144, 226, 0.4);
 				border-radius: 10px;
 			}
 
 			.modal-content::-webkit-scrollbar-thumb:hover {
-				background: linear-gradient(135deg, #5a67d8, #4a90e2);
+				background: rgba(74, 144, 226, 0.7);
 			}
 
 			@keyframes slideIn {
