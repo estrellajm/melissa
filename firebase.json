@@ -1,0 +1,14 @@
+{
+    "hosting": {
+        "site": "mppcare",
+        "public": ".",
+        "ignore": [
+            "firebase.json",
+            "**/.*",
+            "**/node_modules/**",
+            "_write_html.py",
+            "package.json",
+            "package-lock.json"
+        ]
+    }
+}
