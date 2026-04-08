@@ -843,7 +843,7 @@
           box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         "
       />
-      <h1>🐶 Melissa's Pawsome Pet Care 🐱</h1>
+      <h1>🐶 Melissa's Pawsome Pet Care, LLC 🐱</h1>
       <p class="tagline">Where Every Pet Gets VIP Treatment! ✨</p>
     </header>
 
@@ -915,6 +915,40 @@
             <p>
               Feeding and tank maintenance to keep your aquatic buddies happy
               and healthy!
+            </p>
+            <p style="font-size: 0.9em; margin-top: 15px; opacity: 0.9">
+              Click to learn more ✨
+            </p>
+          </div>
+          <div
+            class="service-item"
+            onclick="openModal('reptile')"
+            style="
+              background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+            "
+          >
+            <div class="service-icon">🦎</div>
+            <h3>Reptile Care</h3>
+            <p>
+              Expert care for your scaly companions, from feeding to habitat
+              maintenance!
+            </p>
+            <p style="font-size: 0.9em; margin-top: 15px; opacity: 0.9">
+              Click to learn more ✨
+            </p>
+          </div>
+          <div
+            class="service-item"
+            onclick="openModal('exotic')"
+            style="
+              background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
+            "
+          >
+            <div class="service-icon">🦜</div>
+            <h3>Exotic Pet Care</h3>
+            <p>
+              Specialized care for your unique and extraordinary animal
+              companions!
             </p>
             <p style="font-size: 0.9em; margin-top: 15px; opacity: 0.9">
               Click to learn more ✨
@@ -1273,6 +1307,146 @@
             <strong>We Care:</strong> Whether you have goldfish, tropical fish,
             or a saltwater reef, we'll follow your specific instructions to keep
             your aquarium thriving!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="reptileModal"
+      class="modal"
+      onclick="closeModalOnBackground(event, 'reptile')"
+    >
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <span
+          class="close"
+          onclick="
+            closeModal('reptile');
+            event.stopPropagation();
+          "
+          >&times;</span
+        >
+        <div class="modal-header">
+          <div class="modal-icon">🦎</div>
+          <h2 class="modal-title">Expert Reptile Care Services</h2>
+        </div>
+        <div class="modal-body">
+          <p><strong>Your scaly friend is in great hands!</strong></p>
+          <p>
+            Reptiles have unique needs that require specialized knowledge. We
+            provide attentive, knowledgeable care to keep your reptile healthy
+            and thriving.
+          </p>
+
+          <h3 style="color: #56ab2f; margin-top: 25px; margin-bottom: 15px">
+            What We Provide:
+          </h3>
+          <ul>
+            <li>
+              🍽️ <strong>Feeding:</strong> Proper live, frozen, or vegetarian
+              meals according to your reptile's species and diet
+            </li>
+            <li>
+              🌡️ <strong>Habitat Monitoring:</strong> Checking temperature
+              gradients, humidity, and UVB lighting
+            </li>
+            <li>
+              🧹 <strong>Enclosure Maintenance:</strong> Spot cleaning and
+              substrate care to maintain a hygienic environment
+            </li>
+            <li>
+              🔍 <strong>Health Observation:</strong> Monitoring shedding,
+              activity, and behavior for any concerns
+            </li>
+            <li>
+              💧 <strong>Fresh Water:</strong> Daily water dish changes and
+              misting as needed
+            </li>
+            <li>
+              📸 <strong>Photo Updates:</strong> Regular pictures so you can see
+              your reptile doing well
+            </li>
+            <li>
+              ⚡ <strong>Equipment Checks:</strong> Ensuring heat lamps,
+              thermostats, and UVB bulbs are functioning properly
+            </li>
+          </ul>
+
+          <p style="margin-top: 20px; font-style: italic; color: #56ab2f">
+            <strong>We Care For:</strong> Bearded dragons, geckos, snakes,
+            tortoises, iguanas, chameleons, and more — every scale and shell
+            welcome!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="exoticModal"
+      class="modal"
+      onclick="closeModalOnBackground(event, 'exotic')"
+    >
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <span
+          class="close"
+          onclick="
+            closeModal('exotic');
+            event.stopPropagation();
+          "
+          >&times;</span
+        >
+        <div class="modal-header">
+          <div class="modal-icon">🦜</div>
+          <h2 class="modal-title">Exotic Pet Care Services</h2>
+        </div>
+        <div class="modal-body">
+          <p>
+            <strong>Extraordinary pets deserve extraordinary care!</strong>
+          </p>
+          <p>
+            From feathered friends to small mammals and beyond, we bring
+            specialized knowledge and genuine passion to caring for your unique
+            companions.
+          </p>
+
+          <h3 style="color: #f7971e; margin-top: 25px; margin-bottom: 15px">
+            Pets We Care For:
+          </h3>
+          <ul>
+            <li>
+              🦜 <strong>Birds & Parrots:</strong> Feeding, enrichment,
+              socialization, and cage cleaning
+            </li>
+            <li>
+              🦔 <strong>Hedgehogs:</strong> Gentle handling, feeding, wheel
+              cleaning, and habitat upkeep
+            </li>
+            <li>
+              🐹 <strong>Small Mammals:</strong> Guinea pigs, hamsters, gerbils,
+              rats, and chinchillas
+            </li>
+            <li>
+              🦕 <strong>Sugar Gliders:</strong> Specialized diet and bonding
+              time in a safe environment
+            </li>
+            <li>
+              🐢 <strong>Turtles & Tortoises:</strong> Diet, habitat, and
+              enrichment care
+            </li>
+            <li>
+              🌿 <strong>Habitat Enrichment:</strong> Toys, foraging activities,
+              and stimulation tailored to each species
+            </li>
+            <li>
+              📸 <strong>Regular Updates:</strong> Photos and notes so you
+              always know how your exotic pal is doing
+            </li>
+          </ul>
+
+          <p style="margin-top: 20px; font-style: italic; color: #f7971e">
+            <strong>Note:</strong> We'll discuss your exotic pet's specific
+            needs before the first visit to ensure we're fully prepared to
+            provide the best care possible!
           </p>
         </div>
       </div>
