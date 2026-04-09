@@ -559,8 +559,12 @@
 				line-height: 1;
 			}
 
-			#lightbox-prev { left: 12px; }
-			#lightbox-next { right: 12px; }
+			#lightbox-prev {
+				left: 12px;
+			}
+			#lightbox-next {
+				right: 12px;
+			}
 
 			.lightbox-nav:hover {
 				color: #f093fb;
@@ -572,10 +576,138 @@
 				bottom: 20px;
 				left: 50%;
 				transform: translateX(-50%);
-				color: rgba(255,255,255,0.7);
+				color: rgba(255, 255, 255, 0.7);
 				font-size: 0.9rem;
 				font-family: inherit;
 				letter-spacing: 0.05em;
+			}
+
+			/* ── GALLERY HEADER ── */
+			.gallery-header {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				margin-bottom: 16px;
+				gap: 12px;
+			}
+
+			.gallery-header h2 {
+				margin-bottom: 0;
+			}
+
+			.gallery-view-all-btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 6px;
+				background: var(--primary);
+				color: #fff;
+				border: none;
+				border-radius: 50px;
+				padding: 9px 20px;
+				font-size: 0.875rem;
+				font-weight: 600;
+				cursor: pointer;
+				transition:
+					background 0.2s,
+					transform 0.2s;
+				white-space: nowrap;
+				flex-shrink: 0;
+			}
+
+			.gallery-view-all-btn:hover {
+				background: var(--primary-light);
+				transform: translateY(-2px);
+			}
+
+			/* ── GRID MODAL ── */
+			#gallery-grid-modal {
+				display: none;
+				position: fixed;
+				inset: 0;
+				z-index: 1900;
+				background: rgba(0, 0, 0, 0.95);
+				backdrop-filter: blur(10px);
+				overflow-y: auto;
+				animation: fadeIn 0.2s ease;
+			}
+
+			#gallery-grid-modal.open {
+				display: block;
+			}
+
+			.gallery-grid-inner {
+				max-width: 1100px;
+				margin: 0 auto;
+				padding: 72px 24px 48px;
+			}
+
+			.gallery-grid-header {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				margin-bottom: 28px;
+			}
+
+			.gallery-grid-title {
+				color: #fff;
+				font-size: 1.4rem;
+				font-weight: 700;
+				letter-spacing: -0.02em;
+			}
+
+			.gallery-grid-close {
+				color: white;
+				font-size: 42px;
+				cursor: pointer;
+				line-height: 1;
+				user-select: none;
+				transition:
+					color 0.2s,
+					transform 0.2s;
+			}
+
+			.gallery-grid-close:hover {
+				color: #f093fb;
+				transform: rotate(90deg) scale(1.2);
+			}
+
+			.gallery-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+				gap: 10px;
+			}
+
+			.gallery-grid-item {
+				width: 100%;
+				aspect-ratio: 1 / 1;
+				border-radius: 12px;
+				overflow: hidden;
+				cursor: pointer;
+				position: relative;
+				transition:
+					transform 0.2s,
+					box-shadow 0.2s;
+			}
+
+			.gallery-grid-item:hover {
+				transform: scale(1.05);
+				box-shadow: 0 8px 24px rgba(240, 147, 251, 0.5);
+			}
+
+			.gallery-grid-item img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				display: block;
+			}
+
+			.gallery-grid-item .grid-num {
+				position: absolute;
+				bottom: 5px;
+				right: 7px;
+				color: rgba(255, 255, 255, 0.7);
+				font-size: 0.7rem;
+				font-weight: 600;
 			}
 
 			footer {
@@ -1183,63 +1315,49 @@
 			</div>
 
 			<div class="card">
-				<h2>Photo Gallery 📸</h2>
-				<div class="gallery-row">
-					<div class="gallery-item" onclick="openLightbox(0)"><img src="photos/photo-01.png" alt="Pet photo 1" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(1)"><img src="photos/photo-02.png" alt="Pet photo 2" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(2)"><img src="photos/photo-03.png" alt="Pet photo 3" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(3)"><img src="photos/photo-04.png" alt="Pet photo 4" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(4)"><img src="photos/photo-05.png" alt="Pet photo 5" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(5)"><img src="photos/photo-06.png" alt="Pet photo 6" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(6)"><img src="photos/photo-07.png" alt="Pet photo 7" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(7)"><img src="photos/photo-08.png" alt="Pet photo 8" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(8)"><img src="photos/photo-09.png" alt="Pet photo 9" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(9)"><img src="photos/photo-10.png" alt="Pet photo 10" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(10)"><img src="photos/photo-11.png" alt="Pet photo 11" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(11)"><img src="photos/photo-12.png" alt="Pet photo 12" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(12)"><img src="photos/photo-13.png" alt="Pet photo 13" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(13)"><img src="photos/photo-14.png" alt="Pet photo 14" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(14)"><img src="photos/photo-15.png" alt="Pet photo 15" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(15)"><img src="photos/photo-16.png" alt="Pet photo 16" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(16)"><img src="photos/photo-17.png" alt="Pet photo 17" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(17)"><img src="photos/photo-18.png" alt="Pet photo 18" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(18)"><img src="photos/photo-19.png" alt="Pet photo 19" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(19)"><img src="photos/photo-20.png" alt="Pet photo 20" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(20)"><img src="photos/photo-21.png" alt="Pet photo 21" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(21)"><img src="photos/photo-22.png" alt="Pet photo 22" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(22)"><img src="photos/photo-23.png" alt="Pet photo 23" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(23)"><img src="photos/photo-24.png" alt="Pet photo 24" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(24)"><img src="photos/photo-25.png" alt="Pet photo 25" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(25)"><img src="photos/photo-26.png" alt="Pet photo 26" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(26)"><img src="photos/photo-27.png" alt="Pet photo 27" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(27)"><img src="photos/photo-28.png" alt="Pet photo 28" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(28)"><img src="photos/photo-29.png" alt="Pet photo 29" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(29)"><img src="photos/photo-30.png" alt="Pet photo 30" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(30)"><img src="photos/photo-31.png" alt="Pet photo 31" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(31)"><img src="photos/photo-32.png" alt="Pet photo 32" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(32)"><img src="photos/photo-33.png" alt="Pet photo 33" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(33)"><img src="photos/photo-34.png" alt="Pet photo 34" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(34)"><img src="photos/photo-35.png" alt="Pet photo 35" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(35)"><img src="photos/photo-36.png" alt="Pet photo 36" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(36)"><img src="photos/photo-37.png" alt="Pet photo 37" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(37)"><img src="photos/photo-38.png" alt="Pet photo 38" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(38)"><img src="photos/photo-39.png" alt="Pet photo 39" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(39)"><img src="photos/photo-40.png" alt="Pet photo 40" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(40)"><img src="photos/photo-41.png" alt="Pet photo 41" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(41)"><img src="photos/photo-42.png" alt="Pet photo 42" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(42)"><img src="photos/photo-43.png" alt="Pet photo 43" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(43)"><img src="photos/photo-44.png" alt="Pet photo 44" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(44)"><img src="photos/photo-45.png" alt="Pet photo 45" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
-					<div class="gallery-item" onclick="openLightbox(45)"><img src="photos/photo-46.png" alt="Pet photo 46" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div></div>
+				<div class="gallery-header">
+					<h2>Photo Gallery 📸</h2>
+					<button class="gallery-view-all-btn" onclick="openGridModal()">🖼️ View All Photos</button>
+				</div>
+				<div class="gallery-row" id="gallery-row">
+					<!-- populated by JS -->
 				</div>
 			</div>
 
+			<!-- Grid Modal -->
+			<div id="gallery-grid-modal">
+				<div class="gallery-grid-inner">
+					<div class="gallery-grid-header">
+						<span class="gallery-grid-title">📸 All Photos</span>
+						<span class="gallery-grid-close" onclick="closeGridModal()">&times;</span>
+					</div>
+					<div class="gallery-grid" id="gallery-grid">
+						<!-- populated by JS -->
+					</div>
+				</div>
+			</div>
 			<!-- Lightbox -->
 			<div id="lightbox" onclick="closeLightbox()">
 				<span id="lightbox-close" onclick="closeLightbox()">&times;</span>
-				<span id="lightbox-prev" class="lightbox-nav" onclick="event.stopPropagation(); navigateLightbox(-1)">&#8249;</span>
+				<span
+					id="lightbox-prev"
+					class="lightbox-nav"
+					onclick="
+						event.stopPropagation();
+						navigateLightbox(-1);
+					"
+					>&#8249;</span
+				>
 				<img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" />
-				<span id="lightbox-next" class="lightbox-nav" onclick="event.stopPropagation(); navigateLightbox(1)">&#8250;</span>
+				<span
+					id="lightbox-next"
+					class="lightbox-nav"
+					onclick="
+						event.stopPropagation();
+						navigateLightbox(1);
+					"
+					>&#8250;</span
+				>
 				<div id="lightbox-counter"></div>
 			</div>
 
@@ -1717,10 +1835,61 @@
 		</div>
 
 		<script>
-			// Lightbox
-			const galleryPhotos = Array.from({length: 46}, (_, i) => `photos/photo-${String(i + 1).padStart(2, '0')}.png`);
+			// ─ Gallery setup ─
+			const allPhotos = Array.from({ length: 46 }, (_, i) => `photos/photo-${String(i + 1).padStart(2, '0')}.png`);
+
+			// Fisher-Yates shuffle
+			function shuffle(arr) {
+				const a = arr.slice();
+				for (let i = a.length - 1; i > 0; i--) {
+					const j = Math.floor(Math.random() * (i + 1));
+					[a[i], a[j]] = [a[j], a[i]];
+				}
+				return a;
+			}
+
+			const galleryPhotos = shuffle(allPhotos);
 			let currentPhotoIndex = 0;
 
+			// Render horizontal row
+			(function renderRow() {
+				const row = document.getElementById('gallery-row');
+				galleryPhotos.forEach((src, i) => {
+					const div = document.createElement('div');
+					div.className = 'gallery-item';
+					div.onclick = () => openLightbox(i);
+					div.innerHTML = `<img src="${src}" alt="Pet photo ${i + 1}" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div>`;
+					row.appendChild(div);
+				});
+			})();
+
+			// Render grid modal
+			(function renderGrid() {
+				const grid = document.getElementById('gallery-grid');
+				galleryPhotos.forEach((src, i) => {
+					const div = document.createElement('div');
+					div.className = 'gallery-grid-item';
+					div.onclick = () => {
+						closeGridModal();
+						openLightbox(i);
+					};
+					div.innerHTML = `<img src="${src}" alt="Pet photo ${i + 1}" loading="lazy" /><span class="grid-num">${i + 1}</span>`;
+					grid.appendChild(div);
+				});
+			})();
+
+			// Grid modal
+			function openGridModal() {
+				document.getElementById('gallery-grid-modal').classList.add('open');
+				document.body.style.overflow = 'hidden';
+			}
+
+			function closeGridModal() {
+				document.getElementById('gallery-grid-modal').classList.remove('open');
+				document.body.style.overflow = 'auto';
+			}
+
+			// Lightbox
 			function openLightbox(index) {
 				currentPhotoIndex = index;
 				updateLightboxImage();
@@ -1750,6 +1919,10 @@
 			}
 
 			document.addEventListener('keydown', function (e) {
+				if (document.getElementById('gallery-grid-modal').classList.contains('open')) {
+					if (e.key === 'Escape') closeGridModal();
+					return;
+				}
 				if (e.key === 'Escape') closeLightbox();
 				if (e.key === 'ArrowLeft') navigateLightbox(-1);
 				if (e.key === 'ArrowRight') navigateLightbox(1);
