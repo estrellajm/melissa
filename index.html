@@ -1878,65 +1878,81 @@
 			const galleryPhotos = shuffle(allPhotos);
 			let currentPhotoIndex = 0;
 
-			// Render horizontal row
+			// Render horizontal row — single DOM write via DocumentFragment
 			(function renderRow() {
 				const row = document.getElementById('gallery-row');
+				const frag = document.createDocumentFragment();
 				galleryPhotos.forEach((src, i) => {
 					const div = document.createElement('div');
 					div.className = 'gallery-item';
-					div.onclick = () => openLightbox(i);
+					div.dataset.index = i;
 					div.innerHTML = `<img src="${src}" alt="Pet photo ${i + 1}" loading="lazy" /><div class="gallery-overlay"><span>🔍</span></div>`;
-					row.appendChild(div);
+					frag.appendChild(div);
 				});
+				// Single delegated listener instead of 54 handlers
+				row.addEventListener('click', (e) => {
+					const item = e.target.closest('.gallery-item');
+					if (item) openLightbox(Number(item.dataset.index));
+				});
+				row.appendChild(frag);
 			})();
 
-			// Render grid modal (deferred until first open)
+			// Render grid modal (deferred until first open) — single DOM write via DocumentFragment
 			let gridRendered = false;
 			function renderGrid() {
 				if (gridRendered) return;
 				gridRendered = true;
 				const grid = document.getElementById('gallery-grid');
+				const frag = document.createDocumentFragment();
 				galleryPhotos.forEach((src, i) => {
 					const div = document.createElement('div');
 					div.className = 'gallery-grid-item';
-					div.onclick = () => {
-						closeGridModal();
-						openLightbox(i);
-					};
+					div.dataset.index = i;
 					div.innerHTML = `<img src="${src}" alt="Pet photo ${i + 1}" loading="lazy" /><span class="grid-num">${i + 1}</span>`;
-					grid.appendChild(div);
+					frag.appendChild(div);
 				});
+				// Single delegated listener instead of 54 handlers
+				grid.addEventListener('click', (e) => {
+					const item = e.target.closest('.gallery-grid-item');
+					if (item) { closeGridModal(); openLightbox(Number(item.dataset.index)); }
+				});
+				grid.appendChild(frag);
 			}
+
+			// Cached DOM refs (avoid repeated lookups)
+			const $lightbox = document.getElementById('lightbox');
+			const $lightboxImg = document.getElementById('lightbox-img');
+			const $lightboxCounter = document.getElementById('lightbox-counter');
+			const $galleryGridModal = document.getElementById('gallery-grid-modal');
 
 			// Grid modal
 			function openGridModal() {
 				renderGrid();
-				document.getElementById('gallery-grid-modal').classList.add('open');
+				$galleryGridModal.classList.add('open');
 				document.body.style.overflow = 'hidden';
 			}
 
 			function closeGridModal() {
-				document.getElementById('gallery-grid-modal').classList.remove('open');
-				document.body.style.overflow = 'auto';
+				$galleryGridModal.classList.remove('open');
+				document.body.style.overflow = '';
 			}
 
 			// Lightbox
 			function openLightbox(index) {
 				currentPhotoIndex = index;
 				updateLightboxImage();
-				document.getElementById('lightbox').classList.add('open');
+				$lightbox.classList.add('open');
 				document.body.style.overflow = 'hidden';
 			}
 
 			function updateLightboxImage() {
-				const img = document.getElementById('lightbox-img');
-				img.style.opacity = '0';
+				$lightboxImg.style.opacity = '0';
 				setTimeout(() => {
-					img.src = galleryPhotos[currentPhotoIndex];
-					img.alt = `Pet photo ${currentPhotoIndex + 1}`;
-					img.style.opacity = '1';
+					$lightboxImg.src = galleryPhotos[currentPhotoIndex];
+					$lightboxImg.alt = `Pet photo ${currentPhotoIndex + 1}`;
+					$lightboxImg.style.opacity = '1';
 				}, 150);
-				document.getElementById('lightbox-counter').textContent = `${currentPhotoIndex + 1} / ${galleryPhotos.length}`;
+				$lightboxCounter.textContent = `${currentPhotoIndex + 1} / ${galleryPhotos.length}`;
 			}
 
 			function navigateLightbox(direction) {
@@ -1945,18 +1961,31 @@
 			}
 
 			function closeLightbox() {
-				document.getElementById('lightbox').classList.remove('open');
-				document.body.style.overflow = 'auto';
+				$lightbox.classList.remove('open');
+				document.body.style.overflow = '';
 			}
 
+			// Single consolidated keydown handler
 			document.addEventListener('keydown', function (e) {
-				if (document.getElementById('gallery-grid-modal').classList.contains('open')) {
-					if (e.key === 'Escape') closeGridModal();
+				if (e.key === 'Escape') {
+					if ($galleryGridModal.classList.contains('open')) {
+						closeGridModal();
+						return;
+					}
+					if ($lightbox.classList.contains('open')) {
+						closeLightbox();
+						return;
+					}
+					document.querySelectorAll('.modal').forEach((m) => {
+						m.style.display = 'none';
+					});
+					document.body.style.overflow = '';
 					return;
 				}
-				if (e.key === 'Escape') closeLightbox();
-				if (e.key === 'ArrowLeft') navigateLightbox(-1);
-				if (e.key === 'ArrowRight') navigateLightbox(1);
+				if ($lightbox.classList.contains('open')) {
+					if (e.key === 'ArrowLeft') navigateLightbox(-1);
+					if (e.key === 'ArrowRight') navigateLightbox(1);
+				}
 			});
 
 			// Modal functions
@@ -1969,7 +1998,7 @@
 			function closeModal(type) {
 				const modal = document.getElementById(type + 'Modal');
 				modal.style.display = 'none';
-				document.body.style.overflow = 'auto';
+				document.body.style.overflow = '';
 			}
 
 			// Close modal when clicking on background
@@ -1978,17 +2007,6 @@
 					closeModal(type);
 				}
 			}
-
-			// Close modal with Escape key
-			document.addEventListener('keydown', function (event) {
-				if (event.key === 'Escape') {
-					const modals = document.querySelectorAll('.modal');
-					modals.forEach((modal) => {
-						modal.style.display = 'none';
-					});
-					document.body.style.overflow = 'auto';
-				}
-			});
 
 			// Create floating animal emojis with more variety
 			const animals = ['🐶', '🐱', '🐠', '🐰', '🐕', '🐈', '🐟', '🐇', '🦴', '🎾', '🧶', '🥕'];
@@ -2017,20 +2035,20 @@
 				setTimeout(() => createAnimal(), i * 500);
 			}
 
-			// Create sparkles on mouse move (reduced frequency for professional look)
+			// Sparkles throttled to one per animation frame via rAF flag
+			let _sparkleAllowed = true;
 			document.addEventListener('mousemove', (e) => {
-				if (Math.random() > 0.95) {
-					const sparkle = document.createElement('div');
-					sparkle.className = 'sparkle';
-					sparkle.style.left = e.pageX + 'px';
-					sparkle.style.top = e.pageY + 'px';
-					sparkle.style.animationDelay = Math.random() + 's';
-					document.body.appendChild(sparkle);
-
-					setTimeout(() => {
-						sparkle.remove();
-					}, 2000);
-				}
+				if (!_sparkleAllowed || Math.random() > 0.9) return;
+				_sparkleAllowed = false;
+				requestAnimationFrame(() => {
+					_sparkleAllowed = true;
+				});
+				const sparkle = document.createElement('div');
+				sparkle.className = 'sparkle';
+				sparkle.style.left = e.pageX + 'px';
+				sparkle.style.top = e.pageY + 'px';
+				document.body.appendChild(sparkle);
+				setTimeout(() => sparkle.remove(), 2000);
 			});
 
 			// ─ EmailJS ─
@@ -2043,7 +2061,9 @@
 			const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY'; // e.g. 'abc123XYZ'
 			const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID'; // e.g. 'service_xxxxxx'
 			const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID'; // e.g. 'template_xxxxxx'
-			emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+			if (!EMAILJS_PUBLIC_KEY.startsWith('YOUR_')) {
+				emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+			}
 
 			function openContactDialog() {
 				document.getElementById('contactDialog').classList.add('open');
@@ -2052,7 +2072,7 @@
 
 			function closeContactDialog() {
 				document.getElementById('contactDialog').classList.remove('open');
-				document.body.style.overflow = 'auto';
+				document.body.style.overflow = '';
 				document.getElementById('contactForm').reset();
 				document.getElementById('contactSuccess').style.display = 'none';
 				document.getElementById('contactError').style.display = 'none';
@@ -2062,41 +2082,43 @@
 				if (e.target === document.getElementById('contactDialog')) closeContactDialog();
 			}
 
-			document.getElementById('contactForm').addEventListener('submit', function (e) {
-				e.preventDefault();
-				const name = document.getElementById('contactName').value.trim();
-				const email = document.getElementById('contactEmail').value.trim();
-				const message = document.getElementById('contactMessage').value.trim();
-				if (!name || !email || !message) {
-					alert('Please fill in your name, email, and message.');
-					return;
-				}
-				const btn = document.getElementById('contactSubmitBtn');
-				btn.disabled = true;
-				btn.textContent = 'Sending…';
-				emailjs
-					.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-						from_name: name,
-						from_email: email,
-						phone: document.getElementById('contactPhone').value.trim() || 'Not provided',
-						message: message
-					})
-					.then(
-						function () {
-							document.getElementById('contactSuccess').style.display = 'block';
-							document.getElementById('contactError').style.display = 'none';
-							document.getElementById('contactForm').reset();
-							btn.disabled = false;
-							btn.textContent = 'Send Message 🐾';
-						},
-						function () {
-							document.getElementById('contactError').style.display = 'block';
-							document.getElementById('contactSuccess').style.display = 'none';
-							btn.disabled = false;
-							btn.textContent = 'Send Message 🐾';
-						}
-					);
-			});
+			const _contactForm = document.getElementById('contactForm');
+			if (_contactForm)
+				_contactForm.addEventListener('submit', function (e) {
+					e.preventDefault();
+					const name = document.getElementById('contactName').value.trim();
+					const email = document.getElementById('contactEmail').value.trim();
+					const message = document.getElementById('contactMessage').value.trim();
+					if (!name || !email || !message) {
+						alert('Please fill in your name, email, and message.');
+						return;
+					}
+					const btn = document.getElementById('contactSubmitBtn');
+					btn.disabled = true;
+					btn.textContent = 'Sending…';
+					emailjs
+						.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+							from_name: name,
+							from_email: email,
+							phone: document.getElementById('contactPhone').value.trim() || 'Not provided',
+							message: message
+						})
+						.then(
+							function () {
+								document.getElementById('contactSuccess').style.display = 'block';
+								document.getElementById('contactError').style.display = 'none';
+								document.getElementById('contactForm').reset();
+								btn.disabled = false;
+								btn.textContent = 'Send Message 🐾';
+							},
+							function () {
+								document.getElementById('contactError').style.display = 'block';
+								document.getElementById('contactSuccess').style.display = 'none';
+								btn.disabled = false;
+								btn.textContent = 'Send Message 🐾';
+							}
+						);
+				});
 
 			// Smooth scrolling for anchor links
 			document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
