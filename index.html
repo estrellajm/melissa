@@ -1863,7 +1863,7 @@
 
 		<script>
 			// ─ Gallery setup ─
-			const allPhotos = Array.from({ length: 46 }, (_, i) => `photos/photo-${String(i + 1).padStart(2, '0')}.png`);
+			const allPhotos = Array.from({ length: 54 }, (_, i) => `photos/photo-${String(i + 1).padStart(2, '0')}.png`);
 
 			// Fisher-Yates shuffle
 			function shuffle(arr) {
@@ -1890,8 +1890,11 @@
 				});
 			})();
 
-			// Render grid modal
-			(function renderGrid() {
+			// Render grid modal (deferred until first open)
+			let gridRendered = false;
+			function renderGrid() {
+				if (gridRendered) return;
+				gridRendered = true;
 				const grid = document.getElementById('gallery-grid');
 				galleryPhotos.forEach((src, i) => {
 					const div = document.createElement('div');
@@ -1903,10 +1906,11 @@
 					div.innerHTML = `<img src="${src}" alt="Pet photo ${i + 1}" loading="lazy" /><span class="grid-num">${i + 1}</span>`;
 					grid.appendChild(div);
 				});
-			})();
+			}
 
 			// Grid modal
 			function openGridModal() {
+				renderGrid();
 				document.getElementById('gallery-grid-modal').classList.add('open');
 				document.body.style.overflow = 'hidden';
 			}
