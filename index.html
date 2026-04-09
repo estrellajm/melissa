@@ -624,18 +624,19 @@
 
 			/* ── GRID MODAL ── */
 			#gallery-grid-modal {
-				display: none;
+				visibility: hidden;
+				opacity: 0;
 				position: fixed;
 				inset: 0;
 				z-index: 1900;
 				background: rgba(0, 0, 0, 0.95);
-				backdrop-filter: blur(10px);
 				overflow-y: auto;
-				animation: fadeIn 0.2s ease;
+				transition: opacity 0.18s ease, visibility 0.18s ease;
 			}
 
 			#gallery-grid-modal.open {
-				display: block;
+				visibility: visible;
+				opacity: 1;
 			}
 
 			.gallery-grid-inner {
@@ -676,8 +677,16 @@
 
 			.gallery-grid {
 				display: grid;
-				grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+				grid-template-columns: repeat(4, 1fr);
 				gap: 10px;
+			}
+
+			@media (max-width: 768px) {
+				.gallery-grid { grid-template-columns: repeat(2, 1fr); }
+			}
+
+			@media (max-width: 480px) {
+				.gallery-grid { grid-template-columns: repeat(2, 1fr); }
 			}
 
 			.gallery-grid-item {
@@ -1914,7 +1923,10 @@
 				// Single delegated listener instead of 54 handlers
 				grid.addEventListener('click', (e) => {
 					const item = e.target.closest('.gallery-grid-item');
-					if (item) { closeGridModal(); openLightbox(Number(item.dataset.index)); }
+					if (item) {
+						closeGridModal();
+						openLightbox(Number(item.dataset.index));
+					}
 				});
 				grid.appendChild(frag);
 			}
