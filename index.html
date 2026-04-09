@@ -7,6 +7,8 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+		<!-- EmailJS SDK -->
+		<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 		<style>
 			:root {
 				--primary: #2e7d6b;
@@ -1375,15 +1377,25 @@
 				</ul>
 			</div>
 
-			<p style="text-align: center; font-size: 1.1em; color: var(--text-muted); margin-bottom: 0;">Contact us for pricing — pricing varies due to location and time.</p>
-			<a href="#contact" class="cta-button">Contact Us Today! 📞</a>
+			<p style="text-align: center; font-size: 1.1em; color: var(--text-muted); margin-bottom: 0">
+				Contact us for pricing — pricing varies due to location and time.
+			</p>
+			<button
+				class="cta-button"
+				onclick="window.location.href='mailto:Melissaspawsomepetcare@gmail.com?subject=Pet%20Care%20Inquiry%20%E2%80%93%20Melissa%27s%20Pawsome%20Pet%20Care&body=Hi%20Melissa!%0A%0AI%20found%20your%20website%20and%20I%27m%20interested%20in%20your%20services.%20Here%20are%20my%20details%3A%0A%0AMy%20name%3A%20%0AMy%20pet(s)%20(name%2C%20species%2C%20breed)%3A%20%0AService%20I%27m%20interested%20in%20(Dog%20Walks%2C%20Pet%20Care%2C%20Reiki%2C%20Animal%20Communication%2C%20Dog%20Massage)%3A%20%0AMy%20location%2Farea%3A%20%0APreferred%20days%2Ftimes%3A%20%0AAdditional%20info%20or%20questions%3A%20%0A%0ALooking%20forward%20to%20hearing%20from%20you!'"
+			>Contact Us Today! 📞</button>
 
 			<div class="card" id="contact">
 				<h2>Get In Touch! 💌</h2>
 				<div class="about">
 					<p style="font-size: 1.3em">Ready to give your pets the best care while you're away?</p>
 					<p style="font-size: 1.2em; margin-top: 20px">
-						📧 <a href="mailto:Melissaspawsomepetcare@gmail.com" style="color: var(--primary); text-decoration: none; font-weight: 600">Send us an Email</a><br />
+						📧
+						<a
+							href="mailto:melissaspawsomepetcare@gmail.com"
+							style="color: var(--primary); text-decoration: none; font-weight: 600"
+							>Send us an Email</a
+						><br />
 						📱 Phone: (720)-527-9291<br />
 						📍 Serving Douglas County with love and care!
 					</p>
@@ -1673,7 +1685,10 @@
 						<li>🧘 <strong>Emotional Balance:</strong> Supports emotional wellbeing and behavioral issues</li>
 						<li>🌟 <strong>Enhanced Vitality:</strong> Boosts overall energy and immune function</li>
 						<li>🕊️ <strong>End-of-Life Comfort:</strong> Provides peace and comfort for senior or hospice pets</li>
-						<li>💎 <strong>Crystal Healing:</strong> Crystals are incorporated into every session to enhance and support the energy work</li>
+						<li>
+							💎 <strong>Crystal Healing:</strong> Crystals are incorporated into every session to enhance and support the energy
+							work
+						</li>
 					</ul>
 
 					<h3 style="color: #667eea; margin-top: 25px; margin-bottom: 15px">What to Expect:</h3>
@@ -2007,6 +2022,71 @@
 						sparkle.remove();
 					}, 2000);
 				}
+			});
+
+			// ─ EmailJS ─
+			// Setup instructions (free at emailjs.com):
+			// 1. Create account → Add a Gmail service → copy the Service ID below
+			// 2. Create a template with variables: {{from_name}}, {{from_email}}, {{phone}}, {{message}}
+			//    Set "To Email" in the template to: Melissaspawsomepetcare@gmail.com
+			//    Copy the Template ID below
+			// 3. Go to Account → copy your Public Key below
+			const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY'; // e.g. 'abc123XYZ'
+			const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID'; // e.g. 'service_xxxxxx'
+			const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID'; // e.g. 'template_xxxxxx'
+			emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+			function openContactDialog() {
+				document.getElementById('contactDialog').classList.add('open');
+				document.body.style.overflow = 'hidden';
+			}
+
+			function closeContactDialog() {
+				document.getElementById('contactDialog').classList.remove('open');
+				document.body.style.overflow = 'auto';
+				document.getElementById('contactForm').reset();
+				document.getElementById('contactSuccess').style.display = 'none';
+				document.getElementById('contactError').style.display = 'none';
+			}
+
+			function handleContactDialogBg(e) {
+				if (e.target === document.getElementById('contactDialog')) closeContactDialog();
+			}
+
+			document.getElementById('contactForm').addEventListener('submit', function (e) {
+				e.preventDefault();
+				const name = document.getElementById('contactName').value.trim();
+				const email = document.getElementById('contactEmail').value.trim();
+				const message = document.getElementById('contactMessage').value.trim();
+				if (!name || !email || !message) {
+					alert('Please fill in your name, email, and message.');
+					return;
+				}
+				const btn = document.getElementById('contactSubmitBtn');
+				btn.disabled = true;
+				btn.textContent = 'Sending…';
+				emailjs
+					.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+						from_name: name,
+						from_email: email,
+						phone: document.getElementById('contactPhone').value.trim() || 'Not provided',
+						message: message
+					})
+					.then(
+						function () {
+							document.getElementById('contactSuccess').style.display = 'block';
+							document.getElementById('contactError').style.display = 'none';
+							document.getElementById('contactForm').reset();
+							btn.disabled = false;
+							btn.textContent = 'Send Message 🐾';
+						},
+						function () {
+							document.getElementById('contactError').style.display = 'block';
+							document.getElementById('contactSuccess').style.display = 'none';
+							btn.disabled = false;
+							btn.textContent = 'Send Message 🐾';
+						}
+					);
 			});
 
 			// Smooth scrolling for anchor links
