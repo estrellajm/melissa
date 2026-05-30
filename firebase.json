@@ -1,6 +1,6 @@
 {
     "hosting": {
-        "site": "mppcare",
+        "site": "mppcare-1",
         "public": ".",
         "ignore": [
             "firebase.json",
