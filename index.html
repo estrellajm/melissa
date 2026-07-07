@@ -154,6 +154,29 @@
 				text-transform: uppercase;
 			}
 
+			.trust-badge {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				background: linear-gradient(135deg, var(--primary), var(--primary-light));
+				color: #fff;
+				font-size: 1rem;
+				font-weight: 700;
+				padding: 12px 26px;
+				border-radius: 50px;
+				margin-top: 18px;
+				letter-spacing: 0.03em;
+				text-transform: uppercase;
+				box-shadow: 0 6px 20px rgba(46, 125, 107, 0.35);
+			}
+
+			.footer-trust {
+				font-size: 0.95em;
+				margin-top: 10px;
+				color: var(--primary);
+				font-weight: 600;
+			}
+
 			/* ── LAYOUT ── */
 			.container {
 				max-width: 1100px;
@@ -1354,6 +1377,7 @@
 			/>
 			<h1>🐶 Melissa's Pawsome Pet Care, LLC 🐱</h1>
 			<p class="tagline">Where Every Pet Gets VIP Treatment! ✨</p>
+				<div class="trust-badge">🛡️ Licensed, Bonded &amp; Insured</div>
 		</header>
 
 		<div class="container">
@@ -1368,6 +1392,9 @@
 					<p style="margin-top: 20px">
 						Whether it's a weekend getaway or an extended vacation, your pets will receive personalized attention, playtime,
 						meals, and all the love they deserve. Peace of mind for you, happiness for your pets! 💕
+					</p>
+					<p style="margin-top: 20px; font-weight: 700; color: var(--primary)">
+						🛡️ Fully Licensed, Bonded &amp; Insured — for your complete peace of mind.
 					</p>
 				</div>
 			</div>
@@ -1714,7 +1741,6 @@
 			<div class="card" id="contact">
 				<h2>Get In Touch! 💌</h2>
 				<div class="about">
-					<p style="font-size: 1.3em">Ready to give your pets the best care while you're away?</p>
 					<p style="font-size: 1.2em; margin-top: 20px">
 						📧
 						<a
@@ -1731,6 +1757,7 @@
 
 		<footer>
 			<p>🐾 Melissa's Pawsome Pet Care © 2026 - loving care when you're not there 🐾</p>
+			<p class="footer-trust">🛡️ Licensed, Bonded &amp; Insured</p>
 			<p style="font-size: 1em; margin-top: 10px; color: #999">https://mppcare.com/</p>
 		</footer>
 
